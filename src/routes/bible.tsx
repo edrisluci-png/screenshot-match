@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { loadBible, searchBible, verseSlides, type Bible } from "@/lib/bible";
-import { goLive, useStore } from "@/lib/store";
+import { goLive } from "@/lib/store";
 import { SlideView } from "@/components/SlideView";
 
 export const Route = createFileRoute("/bible")({
