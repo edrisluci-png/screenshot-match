@@ -6,7 +6,7 @@ export type ProgramItem =
   | { id: string; kind: "song"; songId: string }
   | { id: string; kind: "text"; title: string; body: string };
 export type Program = { id: string; name: string; date: string; items: ProgramItem[] };
-export type Live = { slides: Slide[]; index: number; blank: "none" | "black" | "white"; programId?: string };
+export type Live = { slides: Slide[]; index: number; blank: "none" | "black" | "white"; programId?: string | undefined };
 export type State = { songs: Song[]; programs: Program[]; live: Live; maxLines: number };
 
 const KEY = "church-presentation-v1";

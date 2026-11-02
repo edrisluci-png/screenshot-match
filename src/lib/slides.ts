@@ -9,8 +9,9 @@ export function parseLyrics(raw: string): Section[] {
     const t = line.trim();
     const m = t.match(/^\[(.+)\]$/);
     if (m) {
-      cur = { label: m[1], lines: [] };
-      sections.push(cur);
+      const sec: Section = { label: m[1] ?? "", lines: [] };
+      sections.push(sec);
+      cur = sec;
     } else if (t === "") {
       if (cur && cur.lines.length) cur = null;
     } else {
