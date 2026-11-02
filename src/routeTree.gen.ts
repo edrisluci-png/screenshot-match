@@ -10,33 +10,73 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChantsRouteImport } from './routes/chants'
+import { Route as LiveRouteImport } from './routes/live'
+import { Route as ProgrammesRouteImport } from './routes/programmes'
+import { Route as ProjectionRouteImport } from './routes/projection'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChantsRoute = ChantsRouteImport.update({
+  id: '/chants',
+  path: '/chants',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LiveRoute = LiveRouteImport.update({
+  id: '/live',
+  path: '/live',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgrammesRoute = ProgrammesRouteImport.update({
+  id: '/programmes',
+  path: '/programmes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectionRoute = ProjectionRouteImport.update({
+  id: '/projection',
+  path: '/projection',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/chants': typeof ChantsRoute
+  '/live': typeof LiveRoute
+  '/programmes': typeof ProgrammesRoute
+  '/projection': typeof ProjectionRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/chants': typeof ChantsRoute
+  '/live': typeof LiveRoute
+  '/programmes': typeof ProgrammesRoute
+  '/projection': typeof ProjectionRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/chants': typeof ChantsRoute
+  '/live': typeof LiveRoute
+  '/programmes': typeof ProgrammesRoute
+  '/projection': typeof ProjectionRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/chants' | '/live' | '/programmes' | '/projection'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/chants' | '/live' | '/programmes' | '/projection'
+  id: '__root__' | '/' | '/chants' | '/live' | '/programmes' | '/projection'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ChantsRoute: typeof ChantsRoute
+  LiveRoute: typeof LiveRoute
+  ProgrammesRoute: typeof ProgrammesRoute
+  ProjectionRoute: typeof ProjectionRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +88,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/chants': {
+      id: '/chants'
+      path: '/chants'
+      fullPath: '/chants'
+      preLoaderRoute: typeof ChantsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/live': {
+      id: '/live'
+      path: '/live'
+      fullPath: '/live'
+      preLoaderRoute: typeof LiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/programmes': {
+      id: '/programmes'
+      path: '/programmes'
+      fullPath: '/programmes'
+      preLoaderRoute: typeof ProgrammesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projection': {
+      id: '/projection'
+      path: '/projection'
+      fullPath: '/projection'
+      preLoaderRoute: typeof ProjectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ChantsRoute: ChantsRoute,
+  LiveRoute: LiveRoute,
+  ProgrammesRoute: ProgrammesRoute,
+  ProjectionRoute: ProjectionRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
