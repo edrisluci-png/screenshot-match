@@ -26,7 +26,6 @@ function BiblePage() {
   const [from, setFrom] = useState(16);
   const [to, setTo] = useState(16);
   const [query, setQuery] = useState("");
-  const maxLines = useStore((s) => s.maxLines);
   const nav = useNavigate();
 
   useEffect(() => {
