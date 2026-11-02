@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BibleRouteImport } from './routes/bible'
 import { Route as ChantsRouteImport } from './routes/chants'
 import { Route as LiveRouteImport } from './routes/live'
 import { Route as ProgrammesRouteImport } from './routes/programmes'
@@ -18,6 +19,11 @@ import { Route as ProjectionRouteImport } from './routes/projection'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BibleRoute = BibleRouteImport.update({
+  id: '/bible',
+  path: '/bible',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChantsRoute = ChantsRouteImport.update({
@@ -43,6 +49,7 @@ const ProjectionRoute = ProjectionRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bible': typeof BibleRoute
   '/chants': typeof ChantsRoute
   '/live': typeof LiveRoute
   '/programmes': typeof ProgrammesRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bible': typeof BibleRoute
   '/chants': typeof ChantsRoute
   '/live': typeof LiveRoute
   '/programmes': typeof ProgrammesRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bible': typeof BibleRoute
   '/chants': typeof ChantsRoute
   '/live': typeof LiveRoute
   '/programmes': typeof ProgrammesRoute
@@ -65,14 +74,23 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chants' | '/live' | '/programmes' | '/projection'
+  fullPaths:
+    '/' | '/bible' | '/chants' | '/live' | '/programmes' | '/projection'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chants' | '/live' | '/programmes' | '/projection'
-  id: '__root__' | '/' | '/chants' | '/live' | '/programmes' | '/projection'
+  to: '/' | '/bible' | '/chants' | '/live' | '/programmes' | '/projection'
+  id:
+    | '__root__'
+    | '/'
+    | '/bible'
+    | '/chants'
+    | '/live'
+    | '/programmes'
+    | '/projection'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BibleRoute: typeof BibleRoute
   ChantsRoute: typeof ChantsRoute
   LiveRoute: typeof LiveRoute
   ProgrammesRoute: typeof ProgrammesRoute
@@ -86,6 +104,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bible': {
+      id: '/bible'
+      path: '/bible'
+      fullPath: '/bible'
+      preLoaderRoute: typeof BibleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chants': {
@@ -121,6 +146,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BibleRoute: BibleRoute,
   ChantsRoute: ChantsRoute,
   LiveRoute: LiveRoute,
   ProgrammesRoute: ProgrammesRoute,
