@@ -28,9 +28,9 @@ function Programmes() {
   const update = (fn: (p: Program) => Program) =>
     p && setState((s) => ({ ...s, programs: s.programs.map((x) => (x.id === p.id ? fn(x) : x)) }));
   const move = (i: number, d: number) => update((p) => {
-    const items = [...p.items]; const j = i + d;
+    const items = [...p.items]; const j = i + d; const a = items[i], b = items[j];
     if (j < 0 || j >= items.length) return p;
-    [items[i], items[j]] = [items[j], items[i]];
+    if (!a || !b) return p; items[i] = b; items[j] = a;
     return { ...p, items };
   });
   const label = (it: ProgramItem) => it.kind === "song" ? songs.find((s) => s.id === it.songId)?.title ?? "Chant supprimé" : it.title;

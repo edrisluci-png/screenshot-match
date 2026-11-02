@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import type { Slide } from "@/lib/slides";
 
 /** Renders a 1920x1080 slide scaled to fit its container. */
-export function SlideView({ slide, blank = "none", className = "" }: { slide?: Slide; blank?: "none" | "black" | "white"; className?: string }) {
+export function SlideView({ slide, blank = "none", className = "" }: { slide?: Slide | undefined; blank?: "none" | "black" | "white"; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.2);
   useEffect(() => {
